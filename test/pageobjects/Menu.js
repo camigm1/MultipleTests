@@ -8,9 +8,11 @@ class Menu extends Page {
     /**
      * define selectors using getter methods
      */
-
+    get deleteBtn(){
+        return $('#react-burger-cross-btn')
+    }
     get hamMenu () {
-        return $('div[class="bm-burger-button"]');
+        return $('#react-burger-menu-btn');
     }
 
     get allItems () {
@@ -18,34 +20,57 @@ class Menu extends Page {
     }
 
     get about () {
-        return $('button[type="submit"]');
+        return $('#about_sidebar_link');
     }
 
     get logout () {
-        return $('button[type="submit"]');
+        return $('#logout_sidebar_link');
     }
 
     get resetAppState () {
-        return $('button[type="submit"]');
+        return $('#reset_sidebar_link');
+    }
+
+    get addToCart(){
+        return $('#add-to-cart-sauce-labs-backpack')
     }
     
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    async hamMenuItems () {
-        await this.hamMenu.click();
+    
+    
+    //////////////////////////HOVER STATES HAM MENU
+    async allItemsHover () {
+        await this.allItems.moveTo();
+        await expect(this.allItems).toHaveStyle({color: "rgba(61,220,145,1)"});
     }
-    async allItemsItems () {
-        await this.allItems.click();
+
+    async aboutLinkHover(){
+        await this.about.moveTo();
+        await expect(this.about).toHaveStyle({color: "rgba(61,220,145,1)"});
+    }
+
+    async logoutBtnHover(){
+        await this.logout.moveTo();
+        await expect(this.logout).toHaveStyle({color: "rgba(61,220,145,1)"});
+    }
+
+    async resetHover(){
+        await this.resetAppState.moveTo();
+        await expect(this.resetAppState).toHaveStyle({color: "rgba(61,220,145,1)"});
+    }
+    ///////////
+    async multipleClicks(){
+        for(let x=1;x<10;x++){
+            await this.allItems.click()
+            await browser.pause(2000)
+        }
     }
 
 
     /**
      * overwrite specific options to adapt it to page object
      */
-    openPage () {
-        return super.openPage('inventory.html');
+    openHomepage () {
+        return super.openHomepage('inventory.html');
     }
     
 }

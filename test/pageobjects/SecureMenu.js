@@ -8,12 +8,16 @@ class SecureMenu extends Page {
     /**
      * define selectors using getter methods
      */
+    get getDelete(){
+        return $('')
+    }
+
     get getMenu () {
         return $('a[id="inventory_sidebar_link"]')
     }
 
     get getAllItems(){
-        return $('[id="item_4_title_link"]')
+        return $('span[class="title"]')
     }
     
     get getAbout(){
@@ -23,7 +27,9 @@ class SecureMenu extends Page {
     get getLogout(){
         return $('#login-button')
     }
-    
+    get getReset(){
+        return $('a[class="shopping_cart_link"]')
+    }
 
 }
 

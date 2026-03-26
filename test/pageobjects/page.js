@@ -13,7 +13,11 @@ export default class Page {
         return browser.url(`https://www.saucedemo.com/`)
     }
 
-    openPage (path) {
+    openHomepage (path) {
+        return browser.url(`https://www.saucedemo.com/${path}`)
+    }
+
+    openCart (path) {
         return browser.url(`https://www.saucedemo.com/${path}`)
     }
 }
