@@ -37,34 +37,6 @@ class Menu extends Page {
     
     
     
-    //////////////////////////HOVER STATES HAM MENU
-    async allItemsHover () {
-        await this.allItems.moveTo();
-        await expect(this.allItems).toHaveStyle({color: "rgba(61,220,145,1)"});
-    }
-
-    async aboutLinkHover(){
-        await this.about.moveTo();
-        await expect(this.about).toHaveStyle({color: "rgba(61,220,145,1)"});
-    }
-
-    async logoutBtnHover(){
-        await this.logout.moveTo();
-        await expect(this.logout).toHaveStyle({color: "rgba(61,220,145,1)"});
-    }
-
-    async resetHover(){
-        await this.resetAppState.moveTo();
-        await expect(this.resetAppState).toHaveStyle({color: "rgba(61,220,145,1)"});
-    }
-    ///////////
-    async multipleClicks(){
-        for(let x=1;x<10;x++){
-            await this.allItems.click()
-            await browser.pause(2000)
-        }
-    }
-
 
     /**
      * overwrite specific options to adapt it to page object

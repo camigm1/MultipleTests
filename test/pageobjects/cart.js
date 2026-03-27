@@ -1,5 +1,6 @@
 import { $ } from '@wdio/globals'
 import Page from './page.js';
+import Menu from './Menu.js';
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -12,7 +13,7 @@ class Cart extends Page {
         return $('.shopping_cart_link')
     }
    
-    get itemInCart () { //shows me the number 1 in cart after adding item
+    get itemInCart () { //shows me the number amount in cart after adding item
         return $('span[class="shopping_cart_badge"]');
     }
 
@@ -46,9 +47,9 @@ class Cart extends Page {
     get addOnesie(){
         return $('#add-to-cart-sauce-labs-onesie')
     }
-    // get addRedShirt(){
-    //     return $('#add-to-cart-test.allthethings()-t-shirt-(red)')
-    // }
+    get addRedShirt(){
+        return $('button[data-test="add-to-cart-test.allthethings()-t-shirt-(red)"]')
+    }
     
     get allAddToCartButtons() {
         return [
@@ -57,7 +58,7 @@ class Cart extends Page {
             this.addBoltShirt,
             this.addJacket,
             this.addOnesie,
-            // this.addRedShirt
+            this.addRedShirt
         ];
     }
 
@@ -66,18 +67,6 @@ class Cart extends Page {
             await btn.click();
         }
     }
-    //////////////////////////HOVER STATES HAM MENU
-    
-
-
-    ///////////
-    async multipleClicks(){
-        for(let x=1;x<10;x++){
-            await this.allItems.click()
-            await browser.pause(2000)
-        }
-    }
-
 
     /**
      * overwrite specific options to adapt it to page object
