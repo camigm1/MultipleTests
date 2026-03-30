@@ -15,6 +15,7 @@ class Helpers extends Page {
     }
 
      async toClick(selector) {// Adds click function to selectors
+        await selector.waitForClickable({ timeout: 5000 });
             await selector.click();
     }
     

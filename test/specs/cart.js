@@ -9,7 +9,6 @@ import Helpers from '../pageobjects/helpers.js';
 
 
 describe('Tests Cart Functionality', () => {
-
     before(async () => {
         await LoginPage.openLogin()
         await LoginPage.login('standard_user', 'secret_sauce')
@@ -19,7 +18,7 @@ describe('Tests Cart Functionality', () => {
         await Helpers.toClick(Cart.shoppingCart)
         await Helpers.asserts(SecureCart.getCart,'')
     })
-   it('Adds and checks Cart Inventory Number', async () => {
+   it('Adds One Iteam and checks Cart Inventory Number', async () => {
         await Menu.openHomepage()
         await Helpers.toClick(Cart.addToCartCart)
         await Helpers.asserts(Cart.itemInCart,'1')
@@ -39,21 +38,23 @@ describe('Tests Cart Functionality', () => {
         await Helpers.toClick(Cart.continueShopping)
         await Helpers.asserts(SecureCart.getContinueShopping,'Products')
     })
-    it('Clicks on item inside the cart', async () => {
+    it('Clicks on item inside the Cart', async () => {
         await Helpers.toClick(Cart.addToCartCart)
         await Helpers.toClick(Cart.shoppingCart)
         await Helpers.toClick(Cart.itemInCartClick)
         await Helpers.asserts(SecureCart.inventoryName,'Sauce Labs Bike Light')
     })
-    it('Clicks on Multiple items to add them cart', async () => {
-        await Menu.openHomepage()
-        await Helpers.toClick(Menu.hamMenu)
-        await Helpers.toClick(Menu.resetAppState)
-        await Helpers.toClick(Cart.shoppingCart)
-        await Helpers.toClick(Cart.continueShopping)
-        await Cart.addAllToCart()
-        await Helpers.asserts(Cart.itemInCart,'6')
+    it('Clicks on Random Item to add to Cart', async () => {
+        await Cart.resetCart()
+        await Cart.addItemToCart(Cart.allAddToCartButtons)
+        await Helpers.asserts(Cart.itemInCart,'1')
     })
+    it('Clicks on All items and adds them to Cart', async () => {
+        await Cart.resetCart();
+        await Cart.addAllToCart()
+        await Helpers.asserts(Cart.itemInCart,Cart.allAddToCartButtons.length.toString())
+    })
+    
 })
 
   

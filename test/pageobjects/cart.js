@@ -1,6 +1,7 @@
 import { $ } from '@wdio/globals'
 import Page from './page.js';
 import Menu from './Menu.js';
+import Helpers from './helpers.js'
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -28,6 +29,26 @@ class Cart extends Page {
     get itemInCartClick(){
         return $('.inventory_item_name')
     }
+    ///// Data test selectors
+
+    get allAddToCartArray() {
+        return [
+            'sauce-labs-backpack',
+            'sauce-labs-bike-light',
+            'sauce-labs-bolt-t-shirt',
+            'sauce-labs-fleece-jacket',
+            'sauce-labs-onesie',
+            'test.allthethings()-t-shirt-(red)'
+        ];
+    }
+    async remove(item){
+        return (`[data-test="remove-${item}"]`)
+    }
+
+    async add(item){
+         return (`[data-test="add-to-cart-${item}"]`)
+    }
+
 
     //////////////// All Items Selectors
     get addBackpack(){
@@ -61,11 +82,24 @@ class Cart extends Page {
             this.addRedShirt
         ];
     }
-
+    
     async addAllToCart() {
         for (const btn of this.allAddToCartButtons) {
-            await btn.click();
+            await btn.click()
+            ;
         }
+    }
+    //New random function to add item to Cart
+    async addItemToCart(arr){
+        const randomItem = Math.floor(Math.random() * arr.length);
+        await arr[randomItem].click()
+    }
+
+    async resetCart(){
+        await Menu.openHomepage()
+        await Helpers.toClick(Menu.hamMenu)
+        await Helpers.toClick(Menu.resetAppState)
+        await browser.refresh()
     }
 
     /**
