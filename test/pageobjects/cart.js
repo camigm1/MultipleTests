@@ -1,6 +1,6 @@
 import { $ } from '@wdio/globals'
 import Page from './page.js';
-import Menu from './Menu.js';
+import Menu from './menu.js';
 import Helpers from './helpers.js'
 
 /**
@@ -86,7 +86,6 @@ class Cart extends Page {
     async addAllToCart() {
         for (const btn of this.allAddToCartButtons) {
             await btn.click()
-            ;
         }
     }
     //New random function to add item to Cart
@@ -100,6 +99,11 @@ class Cart extends Page {
         await Helpers.toClick(Menu.hamMenu)
         await Helpers.toClick(Menu.resetAppState)
         await browser.refresh()
+    }
+
+    async addAndNavigateToCart(){
+        await Helpers.toClick(this.addToCartCart)
+        await Helpers.toClick(this.shoppingCart)
     }
 
     /**
