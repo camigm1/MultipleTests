@@ -31,6 +31,10 @@ class LoginPage extends Page {
         await this.SubmitBtn.click();
     }
 
+    async logoutFromHomepage(){
+        
+    }
+
     /**
      * overwrite specific options to adapt it to page object
      */

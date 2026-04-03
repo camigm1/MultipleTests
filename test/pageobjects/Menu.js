@@ -35,8 +35,6 @@ class Menu extends Page {
         return $('#add-to-cart-sauce-labs-backpack')
     }
     
-
-    
     get allHamLinkBtns(){
         return[this.allItems,this.about,this.logout,this.resetAppState]
     }

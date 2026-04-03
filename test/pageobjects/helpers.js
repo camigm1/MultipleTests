@@ -19,8 +19,8 @@ class Helpers extends Page {
             await selector.click();
     }
     
-    async multipleClicks(selector){// Adds multiple clicks to a link
-        for(let x=1;x<=10;x++){
+    async multipleClicks(selector,numclicks){// Adds multiple clicks to a link
+        for(let x=1;x<=numclicks;x++){
             await selector.click()
             await browser.pause(1000)
         }

@@ -29,26 +29,37 @@ class Cart extends Page {
     get itemInCartClick(){
         return $('.inventory_item_name')
     }
+
+    get errorBtn(){
+        return $('h3[data-test="error"]')
+    }
     ///// Data test selectors
 
-    get allAddToCartArray() {
-        return [
-            'sauce-labs-backpack',
-            'sauce-labs-bike-light',
-            'sauce-labs-bolt-t-shirt',
-            'sauce-labs-fleece-jacket',
-            'sauce-labs-onesie',
-            'test.allthethings()-t-shirt-(red)'
-        ];
-    }
-    async remove(item){
-        return (`[data-test="remove-${item}"]`)
-    }
+    // get allAddToCartTextArr() {
+    //     return [
+    //         'sauce-labs-backpack',
+    //         'sauce-labs-bike-light',
+    //         'sauce-labs-bolt-t-shirt',
+    //         'sauce-labs-fleece-jacket',
+    //         'sauce-labs-onesie',
+    //         'test.allthethings()-t-shirt-(red)'
+    //     ];
+    // }
+    // async remove(item){
+    //     return (`#remove-${item}`)
+    // }
 
-    async add(item){
-         return (`[data-test="add-to-cart-${item}"]`)
-    }
+    // async add(item){
+    //      return (`#add-to-cart-${item}`)
+    // }
 
+    
+
+    // async selectorCheck(word){
+    //     return $(`#${word}-`)
+    // }
+
+    
 
     //////////////// All Items Selectors
     get addBackpack(){
@@ -88,11 +99,32 @@ class Cart extends Page {
             await btn.click()
         }
     }
-    //New random function to add item to Cart
+
+    
+    // New random function to add item to Cart
     async addItemToCart(arr){
-        const randomItem = Math.floor(Math.random() * arr.length);
-        await arr[randomItem].click()
+        const randomNum = Math.floor(Math.random() * arr.length);
+        let randItem = await arr[randomNum].click();
+        return randItem
     }
+
+    async grabRandNumArr(){
+        const randomCount = Math.floor(Math.random() * this.allAddToCartButtons.length) + 1;
+        const shuffled = [...this.allAddToCartButtons
+        ].sort(() => 0.5 - Math.random());
+        const randomSubset = shuffled.slice(0, randomCount);
+        for (const btn of randomSubset) {
+            await btn.click()
+        }
+         return randomSubset.length;   
+        }
+    
+    async removeRandNumArr(itemsAdded) {
+    const removeButtons = await $$('.cart_item .btn_secondary');
+    for (let i = 0; i < itemsAdded; i++) {
+        await removeButtons[i].click();
+    }
+}
 
     async resetCart(){
         await Menu.openHomepage()
@@ -106,6 +138,11 @@ class Cart extends Page {
         await Helpers.toClick(this.shoppingCart)
     }
 
+    async logoutFromPage(){
+        await Helpers.toClick(Menu.hamMenu);
+        await Helpers.toClick(Menu.logout);
+    }
+
     /**
      * overwrite specific options to adapt it to page object
      */
@@ -116,3 +153,6 @@ class Cart extends Page {
 }
 
 export default new Cart();
+
+
+
