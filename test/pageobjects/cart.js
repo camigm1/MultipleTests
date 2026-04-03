@@ -138,6 +138,21 @@ class Cart extends Page {
         await Helpers.toClick(this.shoppingCart)
     }
 
+    async dinamicAdd(){
+        const items = await $$('.inventory_item');
+        const randomItem = items[Math.floor(Math.random() * items.length)];
+    
+        const itemName = await randomItem.$('.inventory_item_name').getText();
+        await randomItem.$('.btn_primary').click();
+        return itemName
+    }
+
+    async cartMap(){
+        const cartItemNames = await $$('.cart_item .inventory_item_name')
+        .map(el => el.getText());
+        return cartItemNames
+    }
+
     async logoutFromPage(){
         await Helpers.toClick(Menu.hamMenu);
         await Helpers.toClick(Menu.logout);

@@ -49,6 +49,7 @@ describe('Tests Checks Cart Functionality', () => {
         const itemsAdded = await Cart.grabRandNumArr()
         await Helpers.toClick(Cart.shoppingCart)
         await Helpers.asserts(Cart.itemInCart,String(itemsAdded))
+        await Helpers.toClick(Cart.shoppingCart)
         await Cart.removeRandNumArr(itemsAdded)
         await expect(Cart.itemInCart).not.toBeExisting()
     })
@@ -56,6 +57,14 @@ describe('Tests Checks Cart Functionality', () => {
         await Cart.resetCart();
         await Cart.addAllToCart()
         await Helpers.asserts(Cart.itemInCart,Cart.allAddToCartButtons.length.toString())
+    })
+    it('Positive Test: Adds and Checks for correct added item inside Cart Dinamically', async () => {
+        await Cart.resetCart()
+        const itemName = await Cart.dinamicAdd()
+        await Helpers.toClick(Cart.shoppingCart)
+        const cartItemNames = await Cart.cartMap()
+        await Helpers.assertItemInCart(itemName,cartItemNames)
+        
     })
     it('Negative Test: Add items to Cart then navigate back and forth with browser', async () => {
         await Cart.resetCart();

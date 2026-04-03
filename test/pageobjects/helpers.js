@@ -14,17 +14,21 @@ class Helpers extends Page {
             expect.stringContaining(text))
     }
 
-     async toClick(selector) {// Adds click function to selectors
+    async assertItemInCart(itemName, cartItemNames) {
+        await expect(cartItemNames).toContain(itemName);
+}
+
+    async toClick(selector) {// Adds click function to selectors
             await selector.waitForClickable({ timeout: 5000 });
             await selector.click();
     }
     
-    async multipleClicks(selector,numclicks){// Adds multiple clicks to a link
-        for(let x=1;x<=numclicks;x++){
-            await selector.click()
-            await browser.pause(1000)
-        }
-    }
+    // async multipleClicks(selector,numclicks){// Adds multiple clicks to a link
+    //     for(let x=1;x<=numclicks;x++){
+    //         await selector.click()
+    //         await browser.pause(1000)
+    //     }
+    // }
 
     async checkHoverAllAssertion(selectors){ //Loops through array to check for hover state
         for(let selector of selectors)
