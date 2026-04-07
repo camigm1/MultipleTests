@@ -13,6 +13,8 @@ export default class Page {
         return browser.url(`https://www.saucedemo.com/`)
     }
 
+    //I Will add some changes
+
     openHomepage (path) {
         return browser.url(`https://www.saucedemo.com/${path}`)
     }
